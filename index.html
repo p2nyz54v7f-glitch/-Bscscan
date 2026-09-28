@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaction Details</title>
+
+<style>
+:root{
+  --blue:#0785c1;
+  --dark:#111827;
+  --text:#344054;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --bg:#f8f9fb;
+  --green:#12a77c;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  background:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+}
+
+body{
+  overflow-x:hidden;
+}
+
+a{
+  color:var(--blue);
+  text-decoration:none;
+}
+
+.page{
+  width:100%;
+  min-height:100vh;
+  background:#fff;
+}
+
+/* SEARCH */
+
+.search{
+  margin:12px;
+  height:52px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fafbfc;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 15px;
+  color:#7b8490;
+  font-size:16px;
+}
+
+.search-icon{
+  font-size:25px;
+  color:#8c96a3;
+}
+
+/* HEADER */
+
+.header{
+  border-top:1px solid #eee;
+  border-bottom:1px solid var(--border);
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#fff;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#111;
+  position:relative;
+}
+
+.logo:before{
+  content:"";
+  position:absolute;
+  width:10px;
+  height:25px;
+  left:11px;
+  top:8px;
+  border-left:4px solid #fff;
+  border-right:4px solid #fff;
+  transform:skewY(-20deg);
+}
+
+.brand-text b{
+  display:block;
+  color:#111;
+  font-size:24px;
+}
+
+.brand-text small{
+  color:#555;
+  font-size:11px;
+}
+
+.signin{
+  color:#111;
+  font-size:15px;
+}
+
+/* HERO */
+
+.hero{
+  padding:22px 16px 10px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:26px;
+  color:#101828;
+}
+
+.arrows{
+  float:right;
+  display:flex;
+  gap:5px;
+}
+
+.arrows button{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:7px;
+  font-size:22px;
+}
+
+/* FILTERS */
+
+.filters{
+  display:flex;
+  gap:8px;
+  padding:12px 16px;
+  overflow-x:auto;
+}
+
+.pill{
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:9px 14px;
+  background:#fff;
+  font-size:14px;
+  white-space:nowrap;
+}
+
+.pill.blue{
+  background:#0785c1;
+  border-color:#0785c1;
+  color:#fff;
+}
+
+/* SPONSOR */
+
+.sponsor{
+  margin:4px 16px 16px;
+  padding:13px 14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  color:#667085;
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* TABS */
+
+.tabs{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 16px 14px;
+  overflow-x:auto;
+}
+
+.tabs button{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:7px;
+  padding:9px 13px;
+  color:#475467;
+  white-space:nowrap;
+  font-size:14px;
+}
+
+.tabs button.active{
+  background:#0785c1;
+  border-color:#0785c1;
+  color:#fff;
+}
+
+/* CARDS */
+
+.card{
+  margin:0 16px 14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  padding:17px;
+}
+
+.action{
+  color:#667085;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.value{
+  font-size:15px;
+  line-height:1.7;
+  word-break:break-word;
+}
+
+.row{
+  margin-bottom:21px;
+}
+
+.row:last-child{
+  margin-bottom:0;
+}
+
+.label{
+  font-weight:700;
+  font-size:15px;
+  color:#344054;
+  margin-bottom:8px;
+}
+
+.success{
+  display:inline-block;
+  color:#087f5b;
+  background:#ecfdf3;
+  border:1px solid #abefc6;
+  padding:6px 10px;
+  border-radius:7px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 8px;
+  border-radius:6px;
+  background:#f2f4f7;
+  color:#667085;
+  font-size:12px;
+}
+
+.copy{
+  cursor:pointer;
+  margin-left:6px;
+  color:#667085;
+}
+
+.divider{
+  height:1px;
+  background:#eaecf0;
+  margin:20px 0;
+}
+
+/* TRANSFER */
+
+.transfer-title{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:14px;
+}
+
+.transfer{
+  font-size:14px;
+  line-height:1.9;
+  word-break:break-word;
+}
+
+.transfer-line{
+  padding:12px 0;
+}
+
+.token{
+  display:inline-block;
+  background:#f2f4f7;
+  border-radius:6px;
+  padding:3px 7px;
+  color:#475467;
+  font-size:12px;
+}
+
+/* VALUES */
+
+.big{
+  font-size:17px;
+  line-height:1.6;
+}
+
+.big b{
+  color:#101828;
+}
+
+.more{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:15px;
+}
+
+.more span{
+  color:var(--blue);
+  text-align:right;
+}
+
+.details{
+  display:none;
+  margin-top:16px;
+  padding-top:15px;
+  border-top:1px solid var(--border);
+  color:#667085;
+  line-height:1.8;
+}
+
+/* PRIVATE NOTE */
+
+.note{
+  line-height:1.7;
+}
+
+.note a{
+  font-weight:600;
+}
+
+/* KNOWLEDGE */
+
+.knowledge{
+  margin:0 16px;
+  padding:20px 2px;
+  color:#667085;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.knowledge-title{
+  font-weight:700;
+  color:#344054;
+}
+
+/* FOOTER */
+
+.footer{
+  margin-top:20px;
+  padding:30px 16px 80px;
+  background:#f8f9fb;
+  border-top:1px solid var(--border);
+}
+
+.power{
+  font-size:21px;
+  font-weight:700;
+  color:#101828;
+  margin-bottom:12px;
+}
+
+.footer p{
+  margin:8px 0;
+  font-size:14px;
+  line-height:1.6;
+  color:#667085;
+}
+
+.footer .network{
+  margin:20px 0;
+}
+
+.columns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  margin-top:28px;
+}
+
+.columns h3,
+.products h3{
+  margin:0 0 12px;
+  color:#101828;
+  font-size:16px;
+}
+
+.columns p,
+.products p{
+  margin:7px 0;
+  font-size:14px;
+}
+
+.products{
+  margin-top:30px;
+}
+
+.footer hr{
+  border:0;
+  border-top:1px solid var(--border);
+  margin:30px 0 20px;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+  .page{
+    max-width:620px;
+    margin:0 auto;
+    box-shadow:0 0 30px rgba(0,0,0,.06);
+  }
+
+  .search{
+    margin-top:20px;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- SEARCH -->
+
+  <div class="search">
+    <span class="search-icon">⌕</span>
+    <span>Search by Address / Txn Hash / Block</span>
+  </div>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="brand">
+
+      <div class="logo"></div>
+
+      <div class="brand-text">
+        <b>BlockScan</b>
+        <small>Blockchain Explorer</small>
+      </div>
+
+    </div>
+
+    <div class="signin">
+      ◉ &nbsp;Sign In
+    </div>
+
+  </header>
+
+  <!-- TITLE -->
+
+  <section class="hero">
+
+    <h1>
+      Transaction Details
+
+      <span class="arrows">
+        <button>‹</button>
+        <button>›</button>
+      </span>
+
+    </h1>
+
+  </section>
+
+  <!-- FILTERS -->
+
+  <div class="filters">
+
+    <button class="pill blue">Buy⌄</button>
+    <button class="pill blue">Play⌄</button>
+    <button class="pill blue">Gaming⌄</button>
+
+  </div>
+
+  <!-- SPONSORED -->
+
+  <div class="sponsor">
+    <b>Sponsored:</b>
+    Blockchain services and applications
+  </div>
+
+  <!-- TABS -->
+
+  <div class="tabs">
+
+    <button class="active">Overview</button>
+    <button>Logs (2)</button>
+    <button>State</button>
+
+    <button style="margin-left:auto">
+      〈〉 API
+    </button>
+
+    <button>☷⌄</button>
+
+  </div>
+
+  <!-- TRANSACTION ACTION -->
+
+  <section class="card">
+
+    <div class="action">
+      ⚡ TRANSACTION ACTION
+    </div>
+
+    <div class="value">
+
+      <a href="#">
+        0x17D924D9...acE8c48Fd
+      </a>
+
+      &nbsp; Transfer <b>7</b>
+
+      <br>
+
+      ◉
+      <a href="#">
+        ERC20 ***
+      </a>
+
+      &nbsp;to&nbsp;
+
+      <a href="#">
+        0xa55760D4...af99Fff5F
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- BASIC DETAILS -->
+
+  <section class="card">
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Transaction Hash:
+      </div>
+
+      <div class="value">
+
+        0xc5f85352af5cee9320a0995c37f76b74e961d471fc2a950f15329da6fb1a268a
+
+        <span class="copy">
+          ▢
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Status:
+      </div>
+
+      <span class="success">
+        ✓ Success
+      </span>
+
+    </div>
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Block:
+      </div>
+
+      <div class="value">
+
+        <a href="#">
+          124363547
+        </a>
+
+        <br>
+
+        <span class="badge">
+          183175 Block Confirmations
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Timestamp:
+      </div>
+
+      <div class="value">
+
+        ◷ 22 hrs ago
+
+        <br><br>
+
+        <span class="badge">
+          Sep-27-2026 04:18:57 PM +UTC
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FROM / TO -->
+
+  <section class="card">
+
+    <div class="row">
+
+      <div class="label">
+        ❔ From:
+      </div>
+
+      <div class="value">
+
+        <a href="#">
+          0x17D924D9A03Fb7bdf4A87c4281BE464acE8c48Fd
+        </a>
+
+        <span class="copy">▢</span>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Interacted With (To):
+      </div>
+
+      <div class="value">
+
+        <a href="#">
+          0xf918fF574849277eF0b8eb5e5F7E55996f798888
+        </a>
+
+        <span class="copy">▢</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BEP20 TRANSFERS -->
+
+  <section class="card">
+
+    <div class="transfer-title">
+      ❔ BEP-20 Tokens Transferred:
+    </div>
+
+    <div class="tabs" style="padding:0 0 10px">
+
+      <button class="active">
+        All Transfers
+      </button>
+
+      <button>
+        Net Transfers
+      </button>
+
+    </div>
+
+    <div class="transfer">
+
+      <div class="transfer-line">
+
+        <b>From</b><br>
+
+        <a href="#">
+          0x17D924D9...acE8c48Fd
+        </a>
+
+        ▢
+
+        <br><br>
+
+        <b>To</b><br>
+
+        <a href="#">
+          0xa55760D4...af99Fff5F
+        </a>
+
+        ▢
+
+        <br><br>
+
+        <b>For 7</b>
+
+        &nbsp;
+
+        <span class="token">
+          ERC20 ***
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- VALUE -->
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Value:
+      </div>
+
+      <div class="big">
+
+        🟡 <b>7 BNB</b>
+
+        <span style="color:#667085">
+          ($4,582.31)
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- FEE -->
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Transaction Fee:
+      </div>
+
+      <div class="big">
+
+        0.0007 BNB
+
+        <span class="badge">
+          $0.46
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- GAS -->
+
+    <div class="row">
+
+      <div class="label">
+        ❔ Gas Price:
+      </div>
+
+      <div class="big">
+
+        0.000000007 BNB
+
+        <span style="color:#667085">
+          (7 Gwei)
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MORE DETAILS -->
+
+  <section class="card">
+
+    <div
+      class="more"
+      onclick="toggleDetails()"
+    >
+
+      <span style="color:#344054">
+        More Details:
+      </span>
+
+      <span>
+        ＋ Click to show more
+      </span>
+
+    </div>
+
+    <div
+      id="details"
+      class="details"
+    >
+
+      Block: 124363547
+      <br>
+
+      Transaction type: Contract interaction
+      <br>
+
+      Network: BNB Smart Chain
+      <br>
+
+      Transaction status: Success
+
+    </div>
+
+  </section>
+
+  <!-- PRIVATE NOTE -->
+
+  <section class="card note">
+
+    <div class="label">
+      ❔ Private Note:
+    </div>
+
+    To access the
+    <b>Private Note</b>
+    feature, you must be
+
+    <a href="#">
+      Logged In
+    </a>
+
+  </section>
+
+  <!-- KNOWLEDGE -->
+
+  <div class="knowledge">
+
+    <div class="knowledge-title">
+      💡 About transactions
+    </div>
+
+    <p>
+      A transaction is a cryptographically signed instruction
+      that changes the blockchain state.
+    </p>
+
+    <p>
+      Block explorers allow users to track transaction
+      information and blockchain activity.
+    </p>
+
+    <a href="#">
+      Learn more about transactions
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="power">
+      ⬡ Powered By BNB Smart Chain
+    </div>
+
+    <p>
+      BlockScan is a blockchain explorer and analytics platform
+      for BNB Smart Chain.
+    </p>
+
+    <button class="pill network">
+      🦊 &nbsp; Add BSC Network
+    </button>
+
+    <div class="columns">
+
+      <div>
+
+        <h3>Company</h3>
+
+        <p>Brand Assets</p>
+        <p>Contact Us</p>
+        <p>Terms &amp; Privacy</p>
+        <p>Bug Bounty ↗</p>
+
+      </div>
+
+      <div>
+
+        <h3>Community</h3>
+
+        <p>API Documentation</p>
+        <p>Knowledge Base</p>
+        <p>Network Status</p>
+        <p>Learn BSC ↗</p>
+        <p>What is a Block Explorer? ↗</p>
+
+      </div>
+
+    </div>
+
+    <div class="products">
+
+      <h3>
+        Products &amp; Services
+      </h3>
+
+      <p>
+        Advertise ↗
+      </p>
+
+      <p>
+        Explorer as a Service ↗
+      </p>
+
+      <p>
+        Multichain API
+      </p>
+
+      <p>
+        Priority Support
+      </p>
+
+      <p>
+        BlockScan ↗
+      </p>
+
+    </div>
+
+    <hr>
+
+    <p>
+      BlockScan © 2026
+      &nbsp; | &nbsp;
+      Built by Team
+    </p>
+
+  </footer>
+
+</div>
+
+<script>
+
+function toggleDetails(){
+
+  const details =
+    document.getElementById("details");
+
+  if(details.style.display === "block"){
+
+    details.style.display = "none";
+
+  }else{
+
+    details.style.display = "block";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
