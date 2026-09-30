@@ -6,440 +6,410 @@
 <title>Transaction Details</title>
 
 <style>
+*{box-sizing:border-box}
+
 :root{
-  --blue:#0785c1;
-  --dark:#111827;
-  --text:#344054;
-  --muted:#667085;
-  --border:#e4e7ec;
-  --bg:#f8f9fb;
-  --green:#12a77c;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
-  background:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  color:var(--text);
+  --blue:#0b8fd3;
+  --text:#3f4a56;
+  --muted:#75808b;
+  --line:#e4e8ed;
+  --bg:#f8fafc;
+  --green:#12b886;
 }
 
 body{
-  overflow-x:hidden;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
 }
 
 a{
-  color:var(--blue);
+  color:#0787ca;
   text-decoration:none;
 }
 
-.page{
-  width:100%;
-  min-height:100vh;
-  background:#fff;
+button{
+  font:inherit;
 }
 
-/* SEARCH */
-
-.search{
-  margin:12px;
-  height:52px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fafbfc;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 15px;
-  color:#7b8490;
-  font-size:16px;
+.top{
+  background:white;
+  border-bottom:1px solid var(--line);
 }
 
-.search-icon{
-  font-size:25px;
-  color:#8c96a3;
+.price{
+  padding:12px 24px;
+  color:#77818c;
+  border-bottom:1px solid var(--line);
 }
 
-/* HEADER */
+.price strong{
+  color:#1687c7;
+}
+
+.down{
+  color:#e44b4b;
+}
 
 .header{
-  border-top:1px solid #eee;
-  border-bottom:1px solid var(--border);
-  padding:16px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  background:#fff;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
+  gap:20px;
+  padding:14px 24px;
 }
 
 .logo{
-  width:42px;
-  height:42px;
+  width:45px;
+  height:45px;
   border-radius:50%;
-  background:#111;
+  background:#18202a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:bold;
+}
+
+.brand{
+  font-size:25px;
+  font-weight:bold;
+  color:#111;
+  min-width:220px;
+}
+
+.search{
+  flex:1;
+  height:45px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:0 16px;
+  font-size:16px;
+}
+
+.sign{
+  white-space:nowrap;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px 24px 60px;
+}
+
+.title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+h1{
+  margin:0;
+  font-size:25px;
+  color:#252d36;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+}
+
+.menu{
   position:relative;
 }
 
-.logo:before{
-  content:"";
+.blue{
+  background:var(--blue);
+  color:white;
+  border:0;
+  border-radius:8px;
+  padding:10px 15px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.dropdown{
+  display:none;
   position:absolute;
-  width:10px;
-  height:25px;
-  left:11px;
-  top:8px;
-  border-left:4px solid #fff;
-  border-right:4px solid #fff;
-  transform:skewY(-20deg);
+  right:0;
+  top:48px;
+  min-width:180px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:9px;
+  box-shadow:0 10px 25px #0002;
+  z-index:20;
+  overflow:hidden;
 }
 
-.brand-text b{
+.dropdown.show{
   display:block;
-  color:#111;
-  font-size:24px;
 }
 
-.brand-text small{
-  color:#555;
-  font-size:11px;
+.dropdown button{
+  width:100%;
+  border:0;
+  background:white;
+  padding:12px 15px;
+  text-align:left;
+  cursor:pointer;
 }
 
-.signin{
-  color:#111;
-  font-size:15px;
+.dropdown button:hover{
+  background:#f2f7fb;
 }
 
-/* HERO */
-
-.hero{
-  padding:22px 16px 10px;
+.sponsored{
+  padding:16px 0;
+  color:#747e89;
+  border-bottom:1px solid var(--line);
 }
-
-.hero h1{
-  margin:0;
-  font-size:26px;
-  color:#101828;
-}
-
-.arrows{
-  float:right;
-  display:flex;
-  gap:5px;
-}
-
-.arrows button{
-  width:34px;
-  height:34px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:7px;
-  font-size:22px;
-}
-
-/* FILTERS */
-
-.filters{
-  display:flex;
-  gap:8px;
-  padding:12px 16px;
-  overflow-x:auto;
-}
-
-.pill{
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:9px 14px;
-  background:#fff;
-  font-size:14px;
-  white-space:nowrap;
-}
-
-.pill.blue{
-  background:#0785c1;
-  border-color:#0785c1;
-  color:#fff;
-}
-
-/* SPONSOR */
-
-.sponsor{
-  margin:4px 16px 16px;
-  padding:13px 14px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
-  color:#667085;
-  font-size:13px;
-  line-height:1.5;
-}
-
-/* TABS */
 
 .tabs{
   display:flex;
-  align-items:center;
-  gap:6px;
-  padding:0 16px 14px;
-  overflow-x:auto;
+  gap:9px;
+  padding:18px 0;
 }
 
-.tabs button{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:7px;
-  padding:9px 13px;
-  color:#475467;
-  white-space:nowrap;
-  font-size:14px;
+.tab{
+  border:0;
+  background:#e9eef3;
+  color:#243342;
+  border-radius:9px;
+  padding:9px 14px;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.tabs button.active{
-  background:#0785c1;
-  border-color:#0785c1;
-  color:#fff;
+.tab.active{
+  background:var(--blue);
+  color:white;
 }
-
-/* CARDS */
 
 .card{
-  margin:0 16px 14px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fff;
-  padding:17px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  margin-bottom:14px;
 }
 
 .action{
-  color:#667085;
-  font-weight:700;
-  font-size:13px;
-  margin-bottom:15px;
+  padding:20px;
 }
 
-.value{
-  font-size:15px;
-  line-height:1.7;
-  word-break:break-word;
+.action-title{
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:9px;
+}
+
+.action-line{
+  font-size:17px;
+}
+
+.circle{
+  display:inline-flex;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#dbe1e8;
+  align-items:center;
+  justify-content:center;
+  margin-right:12px;
+}
+
+.details{
+  padding:14px 24px;
 }
 
 .row{
-  margin-bottom:21px;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:12px;
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
 }
 
 .row:last-child{
-  margin-bottom:0;
+  border-bottom:0;
 }
 
 .label{
-  font-weight:700;
-  font-size:15px;
-  color:#344054;
-  margin-bottom:8px;
+  color:#77818c;
+  font-size:18px;
+}
+
+.value{
+  font-size:17px;
+  overflow-wrap:anywhere;
 }
 
 .success{
   display:inline-block;
-  color:#087f5b;
-  background:#ecfdf3;
-  border:1px solid #abefc6;
+  color:#08a985;
+  background:#e9fbf6;
+  border:1px solid #8fe6d2;
+  border-radius:8px;
   padding:6px 10px;
-  border-radius:7px;
-  font-size:14px;
-  font-weight:600;
+  font-weight:bold;
 }
 
 .badge{
   display:inline-block;
-  margin-top:5px;
-  padding:5px 8px;
-  border-radius:6px;
-  background:#f2f4f7;
-  color:#667085;
-  font-size:12px;
+  background:#edf0f4;
+  border-radius:8px;
+  padding:7px 10px;
+  margin-left:8px;
+  font-size:13px;
+  font-weight:bold;
 }
 
-.copy{
+.transfer-buttons{
+  display:flex;
+  gap:5px;
+  margin-bottom:10px;
+}
+
+.transfer-button{
+  border:0;
+  border-radius:8px;
+  padding:8px 12px;
+  background:#e9eef3;
+  font-weight:600;
   cursor:pointer;
-  margin-left:6px;
-  color:#667085;
 }
 
-.divider{
-  height:1px;
-  background:#eaecf0;
-  margin:20px 0;
-}
-
-/* TRANSFER */
-
-.transfer-title{
-  font-weight:700;
-  font-size:15px;
-  margin-bottom:14px;
+.transfer-button.active{
+  background:var(--blue);
+  color:white;
 }
 
 .transfer{
-  font-size:14px;
-  line-height:1.9;
-  word-break:break-word;
+  display:none;
 }
 
-.transfer-line{
-  padding:12px 0;
-}
-
-.token{
-  display:inline-block;
-  background:#f2f4f7;
-  border-radius:6px;
-  padding:3px 7px;
-  color:#475467;
-  font-size:12px;
-}
-
-/* VALUES */
-
-.big{
-  font-size:17px;
-  line-height:1.6;
-}
-
-.big b{
-  color:#101828;
+.transfer.active{
+  display:block;
 }
 
 .more{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
+  padding:20px 24px;
+  color:#0787ca;
   cursor:pointer;
-  font-weight:600;
-  font-size:15px;
+  font-size:18px;
 }
 
-.more span{
-  color:var(--blue);
-  text-align:right;
-}
-
-.details{
+.more-content{
   display:none;
-  margin-top:16px;
-  padding-top:15px;
-  border-top:1px solid var(--border);
-  color:#667085;
-  line-height:1.8;
+  padding:0 24px 20px;
 }
 
-/* PRIVATE NOTE */
-
-.note{
-  line-height:1.7;
+.more-content.show{
+  display:block;
 }
 
-.note a{
-  font-weight:600;
+.private{
+  padding:20px 24px;
 }
 
-/* KNOWLEDGE */
-
-.knowledge{
-  margin:0 16px;
-  padding:20px 2px;
-  color:#667085;
-  font-size:14px;
-  line-height:1.7;
+.info{
+  padding:20px 0;
+  color:#74808b;
+  line-height:1.5;
 }
 
-.knowledge-title{
-  font-weight:700;
-  color:#344054;
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 24px 70px;
 }
-
-/* FOOTER */
 
 .footer{
-  margin-top:20px;
-  padding:30px 16px 80px;
-  background:#f8f9fb;
-  border-top:1px solid var(--border);
+  max-width:1100px;
+  margin:auto;
 }
 
-.power{
-  font-size:21px;
-  font-weight:700;
-  color:#101828;
-  margin-bottom:12px;
+.footer-title{
+  font-size:22px;
+  color:#18314d;
 }
 
-.footer p{
-  margin:8px 0;
-  font-size:14px;
-  line-height:1.6;
-  color:#667085;
-}
-
-.footer .network{
-  margin:20px 0;
-}
-
-.columns{
+.footer-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
-  margin-top:28px;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  margin-top:25px;
 }
 
-.columns h3,
-.products h3{
-  margin:0 0 12px;
-  color:#101828;
-  font-size:16px;
+.footer-grid a{
+  display:block;
+  margin:13px 0;
+  color:#26384b;
 }
 
-.columns p,
-.products p{
-  margin:7px 0;
-  font-size:14px;
+.cookie{
+  position:fixed;
+  left:16px;
+  right:16px;
+  bottom:16px;
+  background:white;
+  border:1px solid #dfe4e8;
+  border-radius:12px;
+  box-shadow:0 5px 24px #0002;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  z-index:50;
 }
 
-.products{
-  margin-top:30px;
-}
-
-.footer hr{
+.cookie button{
+  background:var(--blue);
+  color:white;
   border:0;
-  border-top:1px solid var(--border);
-  margin:30px 0 20px;
+  border-radius:9px;
+  padding:11px 18px;
+  cursor:pointer;
 }
 
-/* DESKTOP */
+@media(max-width:700px){
 
-@media(min-width:700px){
-
-  .page{
-    max-width:620px;
-    margin:0 auto;
-    box-shadow:0 0 30px rgba(0,0,0,.06);
+  .header{
+    padding:10px 14px;
   }
 
   .search{
-    margin-top:20px;
+    display:none;
   }
 
-  .hero h1{
-    font-size:28px;
+  .brand{
+    min-width:auto;
+    font-size:21px;
+  }
+
+  .container{
+    padding:16px 12px 50px;
+  }
+
+  .title{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .actions{
+    flex-wrap:wrap;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -447,121 +417,191 @@ a{
 
 <body>
 
-<div class="page">
+<header class="top">
 
-  <!-- SEARCH -->
-
-  <div class="search">
-    <span class="search-icon">⌕</span>
-    <span>Search by Address / Txn Hash / Block</span>
+  <div class="price">
+    BNB Price:
+    <strong>$756.60</strong>
+    <span class="down">(-0.81%)</span>
   </div>
 
-  <!-- HEADER -->
+  <div class="header">
 
-  <header class="header">
+    <div class="logo">◈</div>
 
     <div class="brand">
+      BscScan
+    </div>
 
-      <div class="logo"></div>
+    <input
+      class="search"
+      placeholder="Search by Address / Txn Hash / Block / Token / Domain"
+    >
 
-      <div class="brand-text">
-        <b>BlockScan</b>
-        <small>Blockchain Explorer</small>
+    <div class="sign">◉ Sign In</div>
+
+    <button>☰</button>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="title">
+
+    <h1>
+      Transaction Details
+      <button class="tab">‹</button>
+      <button class="tab">›</button>
+    </h1>
+
+    <div class="actions">
+
+      <div class="menu">
+        <button class="blue" onclick="toggle('buy')">
+          Buy⌄
+        </button>
+
+        <div class="dropdown" id="buy">
+
+          <button onclick="message('Buy BNB')">
+            Buy BNB
+          </button>
+
+          <button onclick="message('Buy Token')">
+            Buy Token
+          </button>
+
+          <button onclick="message('Swap')">
+            Swap
+          </button>
+
+        </div>
+      </div>
+
+
+      <div class="menu">
+        <button class="blue" onclick="toggle('play')">
+          Play⌄
+        </button>
+
+        <div class="dropdown" id="play">
+
+          <button onclick="message('Games')">
+            Games
+          </button>
+
+          <button onclick="message('Arcade')">
+            Arcade
+          </button>
+
+        </div>
+      </div>
+
+
+      <div class="menu">
+        <button class="blue" onclick="toggle('gaming')">
+          Gaming⌄
+        </button>
+
+        <div class="dropdown" id="gaming">
+
+          <button onclick="message('Gaming Hub')">
+            Gaming Hub
+          </button>
+
+          <button onclick="message('Rewards')">
+            Rewards
+          </button>
+
+        </div>
       </div>
 
     </div>
 
-    <div class="signin">
-      ◉ &nbsp;Sign In
-    </div>
-
-  </header>
-
-  <!-- TITLE -->
-
-  <section class="hero">
-
-    <h1>
-      Transaction Details
-
-      <span class="arrows">
-        <button>‹</button>
-        <button>›</button>
-      </span>
-
-    </h1>
-
-  </section>
-
-  <!-- FILTERS -->
-
-  <div class="filters">
-
-    <button class="pill blue">Buy⌄</button>
-    <button class="pill blue">Play⌄</button>
-    <button class="pill blue">Gaming⌄</button>
-
   </div>
 
-  <!-- SPONSORED -->
 
-  <div class="sponsor">
+  <div class="sponsored">
     <b>Sponsored:</b>
-    Blockchain services and applications
+    Demo sponsored area — promotional content placeholder.
   </div>
 
-  <!-- TABS -->
 
   <div class="tabs">
 
-    <button class="active">Overview</button>
-    <button>Logs (2)</button>
-    <button>State</button>
-
-    <button style="margin-left:auto">
-      〈〉 API
+    <button
+      class="tab active"
+      onclick="tab(this)"
+    >
+      Overview
     </button>
 
-    <button>☷⌄</button>
+    <button
+      class="tab"
+      onclick="tab(this)"
+    >
+      Logs (2)
+    </button>
+
+    <button
+      class="tab"
+      onclick="tab(this)"
+    >
+      State
+    </button>
+
+    <button
+      class="tab"
+      onclick="message('API panel opened')"
+    >
+      &lt;/&gt; API
+    </button>
+
+    <button
+      class="tab"
+      onclick="message('Additional actions')"
+    >
+      ☷⌄
+    </button>
 
   </div>
 
-  <!-- TRANSACTION ACTION -->
 
-  <section class="card">
+  <section class="card action">
 
-    <div class="action">
-      ⚡ TRANSACTION ACTION
+    <div class="action-title">
+      TRANSACTION ACTION
     </div>
 
-    <div class="value">
+    <div class="action-line">
+
+      <span class="circle">◈</span>
+
+      <a href="#">
+        0x6BD69eF3...4a8264E67
+      </a>
+
+      Transfer 10
+
+      <span>
+        ◉ ERC20 ***
+      </span>
+
+      to
 
       <a href="#">
         0x17D924D9...acE8c48Fd
       </a>
 
-      &nbsp; Transfer <b>7</b>
-
-      <br>
-
-      ◉
-      <a href="#">
-        ERC20 ***
-      </a>
-
-      &nbsp;to&nbsp;
-
-      <a href="#">
-        0xa55760D4...af99Fff5F
-      </a>
-
     </div>
 
   </section>
 
-  <!-- BASIC DETAILS -->
 
-  <section class="card">
+  <section class="card details">
 
     <div class="row">
 
@@ -570,16 +610,12 @@ a{
       </div>
 
       <div class="value">
-
-        0xc5f85352af5cee9320a0995c37f76b74e961d471fc2a950f15329da6fb1a268a
-
-        <span class="copy">
-          ▢
-        </span>
-
+        0xd2b6b400ec26c55c78b5b7e5733ba327d9afb0b7ebe005be0d1d21a25cd41aff
+        ▣
       </div>
 
     </div>
+
 
     <div class="row">
 
@@ -587,11 +623,14 @@ a{
         ❔ Status:
       </div>
 
-      <span class="success">
-        ✓ Success
-      </span>
+      <div class="value">
+        <span class="success">
+          ● Success
+        </span>
+      </div>
 
     </div>
+
 
     <div class="row">
 
@@ -602,18 +641,17 @@ a{
       <div class="value">
 
         <a href="#">
-          124363547
+          124362777
         </a>
 
-        <br>
-
         <span class="badge">
-          183175 Block Confirmations
+          426043 Block Confirmations
         </span>
 
       </div>
 
     </div>
+
 
     <div class="row">
 
@@ -623,23 +661,42 @@ a{
 
       <div class="value">
 
-        ◷ 22 hrs ago
-
-        <br><br>
+        ◷ 2 days ago
 
         <span class="badge">
-          Sep-27-2026 04:18:57 PM +UTC
+          Sep-27-2026 04:13:10 PM +UTC⌄
         </span>
 
       </div>
 
     </div>
 
-  </section>
 
-  <!-- FROM / TO -->
+    <div class="row">
 
-  <section class="card">
+      <div class="label">
+        ❔ Sponsored:
+      </div>
+
+      <div class="value">
+
+        <div style="
+          height:110px;
+          background:#29204b;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:white;
+          font-size:24px;
+          font-weight:bold;
+        ">
+          PROMOTIONAL BANNER
+        </div>
+
+      </div>
+
+    </div>
+
 
     <div class="row">
 
@@ -650,14 +707,15 @@ a{
       <div class="value">
 
         <a href="#">
-          0x17D924D9A03Fb7bdf4A87c4281BE464acE8c48Fd
+          0x6BD69eF3948e703EC406ce5f73932944a8264E67
         </a>
 
-        <span class="copy">▢</span>
+        ▣
 
       </div>
 
     </div>
+
 
     <div class="row">
 
@@ -671,73 +729,90 @@ a{
           0xf918fF574849277eF0b8eb5e5F7E55996f798888
         </a>
 
-        <span class="copy">▢</span>
+        ▣
 
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- BEP20 TRANSFERS -->
-
-  <section class="card">
-
-    <div class="transfer-title">
-      ❔ BEP-20 Tokens Transferred:
-    </div>
-
-    <div class="tabs" style="padding:0 0 10px">
-
-      <button class="active">
-        All Transfers
-      </button>
-
-      <button>
-        Net Transfers
-      </button>
-
-    </div>
-
-    <div class="transfer">
-
-      <div class="transfer-line">
-
-        <b>From</b><br>
-
-        <a href="#">
-          0x17D924D9...acE8c48Fd
-        </a>
-
-        ▢
-
-        <br><br>
-
-        <b>To</b><br>
-
-        <a href="#">
-          0xa55760D4...af99Fff5F
-        </a>
-
-        ▢
-
-        <br><br>
-
-        <b>For 7</b>
-
-        &nbsp;
-
-        <span class="token">
-          ERC20 ***
+        <span style="color:#0aa987">
+          ●
         </span>
 
       </div>
 
     </div>
 
-    <div class="divider"></div>
 
-    <!-- VALUE -->
+    <div class="row">
+
+      <div class="label">
+        ❔ BEP-20 Tokens Transferred:
+      </div>
+
+      <div class="value">
+
+        <div class="transfer-buttons">
+
+          <button
+            class="transfer-button active"
+            onclick="transfer(this,'all')"
+          >
+            All Transfers
+          </button>
+
+          <button
+            class="transfer-button"
+            onclick="transfer(this,'net')"
+          >
+            Net Transfers
+          </button>
+
+        </div>
+
+
+        <div
+          id="all"
+          class="transfer active"
+        >
+
+          <p>
+            › From
+            <a href="#">
+              0x6BD69eF3...4a8264E67
+            </a>
+
+            To
+
+            <a href="#">
+              0x17D924D9...acE8c48Fd
+            </a>
+
+            For <b>10</b>
+          </p>
+
+          <p>
+            ◉
+            <a href="#">
+              ERC20 ***
+            </a>
+          </p>
+
+        </div>
+
+
+        <div
+          id="net"
+          class="transfer"
+        >
+
+          <p>
+            Net transfer:
+            <b>10 ERC20</b>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
 
     <div class="row">
 
@@ -745,19 +820,15 @@ a{
         ❔ Value:
       </div>
 
-      <div class="big">
-
-        🟡 <b>7 BNB</b>
-
-        <span style="color:#667085">
-          ($4,582.31)
+      <div class="value">
+        🟡 0 BNB
+        <span style="color:#77818c">
+          ($0.00)
         </span>
-
       </div>
 
     </div>
 
-    <!-- FEE -->
 
     <div class="row">
 
@@ -765,19 +836,15 @@ a{
         ❔ Transaction Fee:
       </div>
 
-      <div class="big">
-
-        0.0007 BNB
-
+      <div class="value">
+        0 BNB
         <span class="badge">
-          $0.46
+          $0.00
         </span>
-
       </div>
 
     </div>
 
-    <!-- GAS -->
 
     <div class="row">
 
@@ -785,201 +852,255 @@ a{
         ❔ Gas Price:
       </div>
 
-      <div class="big">
-
-        0.000000007 BNB
-
-        <span style="color:#667085">
-          (7 Gwei)
+      <div class="value">
+        0 BNB
+        <span style="color:#77818c">
+          (0 BNB)
         </span>
-
       </div>
 
     </div>
 
   </section>
 
-  <!-- MORE DETAILS -->
 
   <section class="card">
 
     <div
       class="more"
-      onclick="toggleDetails()"
+      onclick="more()"
     >
-
-      <span style="color:#344054">
-        More Details:
-      </span>
-
-      <span>
-        ＋ Click to show more
-      </span>
-
+      ＋ Click to show more
     </div>
 
     <div
-      id="details"
-      class="details"
+      class="more-content"
+      id="moreContent"
     >
 
-      Block: 124363547
-      <br>
+      <p>
+        <b>More Details</b>
+      </p>
 
-      Transaction type: Contract interaction
-      <br>
+      <p>
+        Additional transaction metadata.
+      </p>
 
-      Network: BNB Smart Chain
-      <br>
-
-      Transaction status: Success
+      <p>
+        Method ID:
+        <span style="color:#0787ca">
+          0x00000000
+        </span>
+      </p>
 
     </div>
 
   </section>
 
-  <!-- PRIVATE NOTE -->
 
-  <section class="card note">
+  <section class="card private">
 
     <div class="label">
       ❔ Private Note:
     </div>
 
-    To access the
-    <b>Private Note</b>
-    feature, you must be
-
-    <a href="#">
-      Logged In
-    </a>
+    <p>
+      To access the
+      <b>Private Note</b>
+      feature, you must be
+      <a href="#">
+        Logged In
+      </a>
+    </p>
 
   </section>
 
-  <!-- KNOWLEDGE -->
 
-  <div class="knowledge">
+  <div class="info">
 
-    <div class="knowledge-title">
-      💡 About transactions
-    </div>
-
-    <p>
-      A transaction is a cryptographically signed instruction
-      that changes the blockchain state.
-    </p>
-
-    <p>
-      Block explorers allow users to track transaction
-      information and blockchain activity.
-    </p>
-
-    <a href="#">
-      Learn more about transactions
-    </a>
+    💡 A transaction is a cryptographically signed instruction
+    that changes the blockchain state.
 
   </div>
 
-  <!-- FOOTER -->
+</main>
 
-  <footer class="footer">
 
-    <div class="power">
-      ⬡ Powered By BNB Smart Chain
+<footer>
+
+  <div class="footer">
+
+    <div class="footer-title">
+      ◈ Powered By BNB Smart Chain
     </div>
 
     <p>
-      BlockScan is a blockchain explorer and analytics platform
-      for BNB Smart Chain.
+      BscScan is a Block Explorer and Analytics Platform for BNB Smart Chain.
     </p>
 
-    <button class="pill network">
-      🦊 &nbsp; Add BSC Network
-    </button>
 
-    <div class="columns">
+    <div class="footer-grid">
 
       <div>
 
         <h3>Company</h3>
 
-        <p>Brand Assets</p>
-        <p>Contact Us</p>
-        <p>Terms &amp; Privacy</p>
-        <p>Bug Bounty ↗</p>
+        <a href="#">Delegate to BscScan</a>
+        <a href="#">Brand Assets</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Terms & Privacy</a>
+        <a href="#">Bug Bounty</a>
 
       </div>
+
 
       <div>
 
         <h3>Community</h3>
 
-        <p>API Documentation</p>
-        <p>Knowledge Base</p>
-        <p>Network Status</p>
-        <p>Learn BSC ↗</p>
-        <p>What is a Block Explorer? ↗</p>
+        <a href="#">API Documentation</a>
+        <a href="#">Knowledge Base</a>
+        <a href="#">Network Status</a>
+        <a href="#">Learn BSC</a>
+        <a href="#">What is a Block Explorer?</a>
+
+      </div>
+
+
+      <div>
+
+        <h3>Products & Services</h3>
+
+        <a href="#">Advertise</a>
+        <a href="#">Explorer as a Service</a>
+        <a href="#">Multichain API</a>
+        <a href="#">Priority Support</a>
+        <a href="#">Blockscan</a>
 
       </div>
 
     </div>
 
-    <div class="products">
+  </div>
 
-      <h3>
-        Products &amp; Services
-      </h3>
+</footer>
 
-      <p>
-        Advertise ↗
-      </p>
 
-      <p>
-        Explorer as a Service ↗
-      </p>
+<div class="cookie" id="cookie">
 
-      <p>
-        Multichain API
-      </p>
+  <div>
+    🍪 This demo uses a cookie-style notice.
+    <a href="#">
+      Terms & Privacy
+    </a>
+  </div>
 
-      <p>
-        Priority Support
-      </p>
-
-      <p>
-        BlockScan ↗
-      </p>
-
-    </div>
-
-    <hr>
-
-    <p>
-      BlockScan © 2026
-      &nbsp; | &nbsp;
-      Built by Team
-    </p>
-
-  </footer>
+  <button
+    onclick="document.getElementById('cookie').remove()"
+  >
+    Got it!
+  </button>
 
 </div>
 
+
 <script>
 
-function toggleDetails(){
+function toggle(id){
 
-  const details =
-    document.getElementById("details");
+  document
+    .querySelectorAll(".dropdown")
+    .forEach(x=>{
+      if(x.id!==id)
+        x.classList.remove("show");
+    });
 
-  if(details.style.display === "block"){
+  document
+    .getElementById(id)
+    .classList.toggle("show");
+}
 
-    details.style.display = "none";
+
+document.addEventListener("click",function(e){
+
+  if(!e.target.closest(".menu")){
+
+    document
+      .querySelectorAll(".dropdown")
+      .forEach(x=>{
+        x.classList.remove("show");
+      });
+
+  }
+
+});
+
+
+function tab(button){
+
+  button
+    .parentElement
+    .querySelectorAll(".tab")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+}
+
+
+function transfer(button,id){
+
+  document
+    .querySelectorAll(".transfer-button")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  document
+    .querySelectorAll(".transfer")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+
+function more(){
+
+  const content =
+    document.getElementById("moreContent");
+
+  const button =
+    document.querySelector(".more");
+
+  content.classList.toggle("show");
+
+  if(content.classList.contains("show")){
+
+    button.textContent =
+      "− Hide details";
 
   }else{
 
-    details.style.display = "block";
+    button.textContent =
+      "＋ Click to show more";
 
   }
+
+}
+
+
+function message(text){
+
+  alert(text);
 
 }
 
